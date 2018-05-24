@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block menu %}
+        <div class="username-header-wrapper clearfix">
+            <div class="username-header">
+                <div class="logout">
+                    <p class="user_name_input">Hello, {{ current_user.name }}</p>
+                    <a class="button button_logout" href="{{ url_for_security('logout') }}">Logout</a>
+
+                </div>
+            </div>
+        </div>
+    <div class="menu-header">
+
+        {% if current_user.has_role('user') %}
+        <a href="{{ url_for('home_user') }}">Home</a>
+        {% endif %}
+
+        {% if current_user.has_role('user') %}
+        <a href="{{ url_for('profile') }}">My Profile</a>
+        {% endif %}
+
+        {% if current_user.has_role('user') %}
+        <a href="{{ url_for('prepare_info') }}">Donation Info</a>
+        {% endif %}
+
+        {% if current_user.has_role('admin') %}
+            <a href="{{ url_for('admin') }}">Donation</a>
+        {% endif %}
+        {% if current_user.has_role('admin') %}
+            <a href="{{ url_for('admin_donors') }}">All donors</a>
+        {% endif %}
+        {% if current_user.has_role('admin') %}
+            <a href="{{ url_for('find_donors') }}">Find donors</a>
+        {% endif %}
+
+    </div>
+{% endblock %}

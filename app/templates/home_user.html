@@ -1,0 +1,27 @@
+{% extends "menu.html" %}
+{% block body %}
+        <div class="main-container-play">
+        <ul>
+            {% if user.information %}
+            <li>
+                <h2>You have donation tomorrow! Read <a href="{{ url_for('prepare_info') }}">info</a> and find out how to prepare.</h2>
+            </li>
+            {% endif %}
+            {% if user.message %}
+               <h2 id="sysStatus"></h2>
+                <form class='answer' method = "post">
+                    <H3>I will come to next week donation:</H3>
+                    <input type="radio" name="rspv" value='True'>YES<br>
+                    <input type="radio" name="rspv" value='False'>NO<br>
+                    <input id="result"  type = "submit" value = "Save changes"/>
+                </form>
+            {% endif %}
+        </ul>
+        </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+    </script>
+    <script src="{{ url_for('static', filename='js/profile/home.js') }}"></script>
+{% endblock %}
+

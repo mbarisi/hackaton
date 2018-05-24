@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% macro render_field_with_errors(field) %}
+    {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <br>
+        {% for error in field.errors %}
+            {{ error }}<br>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_field(field) %}
+    <p>{{ field(**kwargs)|safe }}</p>
+{% endmacro %}
+{% block body %}
+{#        {% include "security/_menu.html" %}#}
+
+    <div class="container login-container">
+            <div class="col-sm-7">
+                <div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item text-center">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Login</a>
+                        </li>
+                        <li class="nav-item col-sm-4 text-center">
+                            <a class="nav-link" href="{{ url_for_security('register') }}"
+                               aria-selected="false">Sign up</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content clearfix" id="myTabContent">
+                    {% include "security/_messages.html" %}
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <form class="email-login form" action="{{ url_for_security('login') }}" method=post
+                              name="login_form">
+                            {{ login_user_form.hidden_tag() }}
+                            <div class="input-group mb-3">
+                                {{ render_field_with_errors(login_user_form.email, class='form-control', placeholder='email') }}
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ render_field_with_errors(login_user_form.password, class='form-control', placeholder='password') }}
+                            </div>
+                            <div class="checkbox remember_me">
+                                <label>
+                                    {{ login_user_form.remember }} {{ login_user_form.remember.label }}
+                                </label>
+                            </div>
+
+                            {{ login_user_form.submit(class='button button-login') }}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

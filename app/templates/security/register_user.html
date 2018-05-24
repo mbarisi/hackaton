@@ -1,0 +1,46 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="../../static/css/style.css">
+</head>
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% extends "layout.html" %}
+
+{% block body %}
+{% include "security/_messages.html" %}
+<div class="register_window">
+  <div class="register_screen">
+      <div class="price-section">
+        <span class="price-name user-plus">Register</span>
+      </div>
+      <form action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+        {{ register_user_form.hidden_tag() }}
+        {{ render_field_with_errors(register_user_form.email,class='form-control') }}
+        {{ render_field_with_errors(register_user_form.name, class='form-control') }}
+        {{ render_field_with_errors(register_user_form.surname,class='form-control') }}
+        {{ render_field_with_errors(register_user_form.roles) }}
+{#        {{ render_field_with_errors(register_user_form.phone_number) }}#}
+{#        {{ render_field_with_errors(register_user_form.email_job) }}#}
+        {{ render_field_with_errors(register_user_form.age ) }}
+{#        {{ render_field_with_errors(register_user_form.blood_type) }}#}
+{#        {{ render_field_with_errors(register_user_form.address) }}#}
+{#        {{ render_field_with_errors(register_user_form.postcode_num) }}#}
+        <div class="clearfix">
+            <ul class="gander">
+              <li>{{ render_field_with_errors(register_user_form.is_male) }}</li>
+            </ul>
+          </div>
+        {{ render_field_with_errors(register_user_form.password, class='form-control') }}
+        {% if register_user_form.password_confirm %}
+          {{ render_field_with_errors(register_user_form.password_confirm,class='form-control') }}
+        {% endif %}
+        {{ render_field_with_errors(register_user_form.gdpr) }}
+        {{ render_field(register_user_form.submit) }}
+
+
+
+      </form>
+          <div style="display: none;" class="log_reg">
+              {% include "security/_menu.html" %}
+              {% endblock %}
+          </div>
+    </div>
+ </div>

@@ -1,0 +1,73 @@
+{% extends "menu.html" %}
+{% block body %}
+<body>
+<div class="main-container-table">
+
+    {#ADMIN#}
+
+    <div>ADMIN</div>
+    <table class="blueTable">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>SURNAME</th>
+            <th>EMAIL</th>
+            </tr>
+        </thead>
+        {% for admin in admins %}
+        <tbody>
+            <tr>
+                    <td> {{ admin.id }} </td>
+                    <td> {{ admin.name }} </td>
+                    <td> {{ admin.surname }} </td>
+                    <td> {{ admin.email }} </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    {#DONORS#}
+
+    <div>DONORS</div>
+    <table class="blueTable">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>SURNAME</th>
+            <th>EMAIL</th>
+            <th>BLOOD TYPE</th>
+            <th>NUMBER OF DONATIONS</th>
+            <th>INVITE USER</th>
+            </tr>
+        </thead>
+        {% for donor in donors %}
+        <tbody>
+            <tr>
+                    <td> {{ donor.id }} </td>
+                    <td> {{ donor.name }} </td>
+                    <td> {{ donor.surname }} </td>
+                    <td> {{ donor.email }} </td>
+                    {% if donor.blood_type %}
+                    <td> {{ donor.blood_type[0].name }} </td>
+                    {% else %}
+                    <td> Unknown </td>
+                    {% endif %}
+                    <td> {{ donor.donation }} </td>
+                    <td>
+                    <form class='edit_info' method = "post">
+                       <ul>
+                        </li><input name="invite"  type = "submit" value = "Invite" />
+                        <input type="hidden" name="id" value="{{ donor.id }}">
+                        </li>
+                       </ul>
+                    </form>
+                    </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

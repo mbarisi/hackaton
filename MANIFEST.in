@@ -1,0 +1,3 @@
+graft spelling-league/templates
+graft spelling-league/static
+include spelling-league/schema.sql

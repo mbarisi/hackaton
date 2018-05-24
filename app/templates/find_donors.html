@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+{% block body %}
+    <div class="main-container-play">
+        <form class='edit_info' method = "post">
+            <h2>Find donors</h2>
+               <ul>
+                {% for b_type in ['0-', '0+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+               <input type="radio" name="blood" value='{{ b_type }}'> {{ b_type }}<br>
+               {% endfor %}
+                </li><input id="result"  type = "submit" value = "Find donors" /></li>
+               </ul>
+        </form>
+    </div>
+{% endblock %}

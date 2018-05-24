@@ -1,0 +1,85 @@
+{% extends "menu.html" %}
+{% block body %}
+<div class="main-container-play">
+
+    <div class="blood">
+        <div class="blood-look">
+            <h3>{{ user.name }} info:</h3>
+                <div>
+                    <div class="blood-details clearfix">
+                        <div class="st-capacity">
+                            <p>Name:</p>
+                            <p class="details-right">{{ user.name }}</p>
+                        </div>
+                        <div class="st-level">
+                            <p>Surname:</p>
+                            <p class="details-right"> {{ user.surname }}</p>
+                        </div>
+                        <div class="points">
+                            <p>Email:</p>
+                            <p class="details-right">{{ user.email }}</p>
+                        </div>
+                        <div class="points">
+                            <p>Number of donations:</p>
+                            <p class="details-right">{{ user.donation }}</p>
+                        </div>
+                        <div class="points">
+                            <p>Age:</p>
+                            <p class="details-right">{{ user.age }}</p>
+                        </div>
+                        {% if user.blood_type %}
+                        <div class="points">
+                            <p>Blood type:</p>
+                            <p class="details-right">{{ user.blood_type[0].name }}</p>
+                        </div>
+                        {% endif %}
+                        {% if user.address %}
+                        <div class="points">
+                            <p>Address:</p>
+                            <p class="details-right">{{ user.address }}</p>
+                        </div>
+                        {% endif %}
+                        {% if user.postcode_num %}
+                        <div class="points">
+                            <p>Postcode:</p>
+                            <p class="details-right">{{ user.postcode_num }}</p>
+                        </div>
+                        {% endif %}
+                        {% if user.email_job %}
+                        <div class="points">
+                            <p>Employer mail:</p>
+                            <p class="details-right">{{ user.email_job }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                       <form class='edit_info' method = "post">
+                       <br/>
+                        <h4>Edit your info: </h4>
+                           <ul>
+                               {% if not user.blood_type %}
+                                   <li>
+                                   BLOOD TYPE:
+                                   {% for b_type in ['0-', '0+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+                                   <input type="radio" name="blood" value='{{ b_type }}'> {{ b_type }}<br>
+                                   {% endfor %}
+                                   </li>
+                               {% endif %}
+
+                               <li>Age:  <input id='age' type="text" onfocus="this.value=''" name="age" value="Enter your age here" class="form-control"></li><br/>
+                               <li>Address:  <input id='address' type="text" onfocus="this.value=''"name="address" value="Enter your address here" class="form-control"></li><br/>
+                               <li>Postcode  <input id='postcode_num' type="text" onfocus="this.value=''" name="postcode_num" value="Enter your postcode here" class="form-control"></li><br/>
+                               <li>Employer mail  <input id='email_job' type="text" onfocus="this.value=''" name="email_job" value="Enter email here" class="form-control"></li><br/><br/>
+                               <input id="result"  type = "submit" value = "Save changes" /></li>
+                           </ul>
+                        </form>
+
+
+                </div>
+            </div>
+</div>
+</div>
+{% endblock %}
+{% block scripts %}
+{#    <script src="{{ url_for('static', filename='js/profile/profile.js') }}"></script>#}
+{% endblock %}
